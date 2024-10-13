@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar with Hero Section</title>
+    <style>
+        * {
+
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+                  
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 10px 20px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu li {
+            display: inline;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .btn-book-call {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background-color: #333;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background-color: #f5f5f5;
+                padding: 10px;
+                border-radius: 8px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            text-align: left;
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .hero .highlight {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(to right, #e700ff, #ff8a00);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        .hero .availability {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            color: #2bc466;
+        }
+
+        .hero .availability .dot {
+            height: 10px;
+            width: 10px;
+            background-color: #2bc466;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .hero .cta-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .hero .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .hero .btn-pricing {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #000;
+        }
+
+        .hero .btn-call {
+            background-color: #000;
+            color: #fff;
+        }
+        /* Footer Styles */
+.footer {
+    background-color: #181510;
+    padding: 40px 20px;
+    color: #fff;
+    border-radius: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-left h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.footer-left p {
+    font-size: 16px;
+    color: #aaa;
+}
+
+.footer-signup {
+    display: flex;
+    margin-top: 15px;
+}
+
+.footer-signup input {
+    padding: 10px;
+    border-radius: 30px 0 0 30px;
+    border: none;
+    outline: none;
+    width: 200px;
+    background-color: #fff;
+}
+
+.footer-signup button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 30px 30px 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.footer-right ul {
+    list-style: none;
+}
+
+.footer-right ul li {
+    margin-bottom: 10px;
+}
+
+.footer-right ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.footer-right ul li a:hover {
+    color: #ccc;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.footer-bottom a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-icons img {
+    height: 20px;
+    margin-left: 10px;
+    filter: brightness(0) invert(1);
+}
+/* Works Section Styles */
+.works {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.works h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+.work-items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.work-item {
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.work-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.work-details {
+    padding: 20px;
+    text-align: left;
+}
+
+.work-details h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.work-details p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+/* Team Section Styles */
+.team {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.team h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+.team-members {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.team-member {
+    width: 250px;
+    text-align: center;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.team-member img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.team-info h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.team-info p {
+    font-size: 16px;
+    color: #555;
+}
+/* Contact Section Styles */
+.contact {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.contact h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.contact p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    color: #555;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #000;
+    outline: none;
+}
+
+.contact-form button {
+    padding: 15px 30px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #333;
+}
+
+/* About Section Styles */
+.about {
+    padding: 80px 20px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: left;
+}
+
+.about-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    width: 100%;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about-points {
+    list-style: none;
+    padding-left: 0;
+}
+
+.about-points li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.about-points strong {
+    color: #000;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* Our Products Section Styles */
+.our-products {
+    padding: 80px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.our-products h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+.product-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.product-item {
+    width: 300px;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.product-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.product-item h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.product-description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.product-pricing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+.add-to-cart {
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #333;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <ul class="nav-menu">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Work</a></li>
+            <li><a href="#">Templates</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">FAQs</a></li>
+        </ul>
+        <a href="#" class="btn-book-call">Book a Call</a>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Product Design for <span class="highlight">Micro SAAS</span></h1>
+        <p>Get instant access to unlimited product design and development requests and revisions from a top-tier creative team for a flat monthly fee. Pause or cancel anytime.</p>
+        <div class="availability">
+            <span class="dot"></span>
+            <span>2 spots available</span>
+        </div>
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-pricing">View Pricing</a>
+            <a href="#" class="btn btn-call">Book a Call</a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+<section class="about">
+    <div class="about-content">
+        <div class="about-text">
+            <h2>About Us</h2>
+            <p>We are a team of passionate designers and developers who are dedicated to helping SaaS businesses scale through high-quality, user-centered design solutions. Our approach is focused on understanding your vision and turning it into an engaging and functional digital experience.</p>
+            <ul class="about-points">
+                <li><strong>Creative Design</strong> - Innovative and user-focused design solutions.</li>
+                <li><strong>Experienced Team</strong> - A team of professionals with years of industry experience.</li>
+                <li><strong>Reliable Support</strong> - Continuous collaboration and reliable support for ongoing projects.</li>
+            </ul>
+        </div>
+        <div class="about-image">
+            <img src="about-us.jpg" alt="About Us">
+        </div>
+    </div>
+</section>
+
+    <!-- Works Section -->
+<section class="works">
+    <h2>Our Latest Projects</h2>
+    <div class="work-items">
+        <!-- Work Item 1 -->
+        <div class="work-item">
+            <img src="project1.jpg" alt="Project 1">
+            <div class="work-details">
+                <h3>Project Title 1</h3>
+                <p>A brief description of Project 1 highlighting the design and development process involved.</p>
+            </div>
+        </div>
+        <!-- Work Item 2 -->
+        <div class="work-item">
+            <img src="project2.jpg" alt="Project 2">
+            <div class="work-details">
+                <h3>Project Title 2</h3>
+                <p>A brief description of Project 2 explaining the unique challenges and solutions provided.</p>
+            </div>
+        </div>
+        <!-- Work Item 3 -->
+        <div class="work-item">
+            <img src="project3.jpg" alt="Project 3">
+            <div class="work-details">
+                <h3>Project Title 3</h3>
+                <p>An overview of Project 3, focusing on the impact of design and development improvements.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Our Product Section -->
+<section class="our-products">
+    <h2>Our Products</h2>
+    <div class="product-list">
+        <!-- Product 1 -->
+        <div class="product-item">
+            <img src="product1.jpg" alt="Product 1">
+            <h3>Product Name 1</h3>
+            <p class="product-description">High-quality design tailored for your SaaS business needs.</p>
+            <div class="product-pricing">
+                <span class="price">$99.99</span>
+                <a href="#" class="btn add-to-cart">Add to Cart</a>
+            </div>
+        </div>
+        <!-- Product 2 -->
+        <div class="product-item">
+            <img src="product2.jpg" alt="Product 2">
+            <h3>Product Name 2</h3>
+            <p class="product-description">Comprehensive design package to elevate your brand identity.</p>
+            <div class="product-pricing">
+                <span class="price">$149.99</span>
+                <a href="#" class="btn add-to-cart">Add to Cart</a>
+            </div>
+        </div>
+        <!-- Product 3 -->
+        <div class="product-item">
+            <img src="product3.jpg" alt="Product 3">
+            <h3>Product Name 3</h3>
+            <p class="product-description">End-to-end product design and development service for your business.</p>
+            <div class="product-pricing">
+                <span class="price">$199.99</span>
+                <a href="#" class="btn add-to-cart">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Team Section -->
+<section class="team">
+    <h2>Meet Our Team</h2>
+    <div class="team-members">
+        <!-- Team Member 1 -->
+        <div class="team-member">
+            <img src="team1.jpg" alt="Team Member 1">
+            <div class="team-info">
+                <h3>John Doe</h3>
+                <p>Lead Designer</p>
+            </div>
+        </div>
+        <!-- Team Member 2 -->
+        <div class="team-member">
+            <img src="team2.jpg" alt="Team Member 2">
+            <div class="team-info">
+                <h3>Jane Smith</h3>
+                <p>Project Manager</p>
+            </div>
+        </div>
+        <!-- Team Member 3 -->
+        <div class="team-member">
+            <img src="team3.jpg" alt="Team Member 3">
+            <div class="team-info">
+                <h3>Michael Brown</h3>
+                <p>Senior Developer</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section -->
+<section class="contact">
+    <h2>Contact Us</h2>
+    <p>We'd love to hear from you! Please fill out the form below to get in touch.</p>
+    <form class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+    <!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-left">
+            <h2>Sign up to Weabers</h2>
+            <p>Your design partner to facilitate your growth journey.</p>
+            <div class="footer-signup">
+                <input type="email" placeholder="your@email.com">
+                <button>Sign Up</button>
+            </div>
+        </div>
+        <div class="footer-right">
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">404</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>Design by Weabers &nbsp; © 2024 Weabers LLC &nbsp; All rights reserved &nbsp; <a href="#">Terms of Service</a></p>
+        <div class="footer-icons">
+            <a href="#"><img src="instagram-icon.png" alt="Instagram"></a>
+            <a href="#"><img src="twitter-icon.png" alt="Twitter"></a>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- JavaScript for Navbar Toggle -->
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
